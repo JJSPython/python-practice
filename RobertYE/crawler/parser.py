@@ -67,19 +67,21 @@ class Setting:
         self.tag_str = []
         self.table_str = []
 
-    def set_tag(self, *texts, nums=[]):
+    def set_tag(self, *texts):
         tag_array = []
-        if len(nums) == 0:
-            for txt in texts:
-                get_tag_array = GetTagWithText(self.html, txt).get_tag()
-                select_array = html_tag_to_json(get_tag_array)
-                tag_array.append({"tag": select_array})
-        else:
-            for t, n in list(zip(texts, nums)):
-                get_tag_array = GetTagWithText(self.html, t, n).get_tag()
-                select_array = html_tag_to_json(get_tag_array)
-                tag_array.append({"tag": select_array})
-        self.tag_str = tag_array
+        for txt in texts:
+            get_tag_array = GetTagWithText(self.html, txt).get_tag()
+            select_array = html_tag_to_json(get_tag_array)
+            tag_array.append({"tag": select_array})
+        self.tag_str += tag_array
+
+    def set_tag_map(self, maps={}):
+        tag_array = []
+        for t, n in maps.items():
+            get_tag_array = GetTagWithText(self.html, t, n).get_tag()
+            select_array = html_tag_to_json(get_tag_array)
+            tag_array.append({"tag": select_array})
+        self.tag_str += tag_array
 
     def set_table(self, *texts):
         text_array = []
@@ -112,13 +114,13 @@ class JsonToGetText:
         self.json = json_str
 
     def get_tag_text(self):
-        select_str = ''
         tag_text = []
         for get_tags in ast.literal_eval(self.json)['tags']:
             for get_tag in get_tags['tag']:
+                select_str = ''
                 select_str += get_tag['select']+" "
-        for text in self.html.select(select_str):
-            tag_text.append(text.string)
+            for text in self.html.select(select_str):
+                tag_text.append(text.string)
         return tag_text
 
     def get_table_text(self):

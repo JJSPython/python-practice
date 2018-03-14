@@ -2,6 +2,7 @@ from RobertYE.crawler.parser import Setting, GetJson, JsonToGetText
 
 setting = Setting(open("QR.html"), "QR")#Setting(html,寫入檔名)
 setting.set_tag("KGL-DOH 01 Apr 2018 Passenger,Freighter,Truck ")#設定要爬的文字
+setting.set_tag_map({'Aircraft :B787': 2})#設定相同文字不同TAG set_tag_map({'TAG','第幾個'})
 setting.set_table("Flight No")#設定要爬的Table的Title其中一個
 setting.to_json()#輸出至檔案
 
