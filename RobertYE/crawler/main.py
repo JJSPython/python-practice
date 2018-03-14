@@ -6,7 +6,7 @@ setting.set_tag_map({'Aircraft :B787': 2})#設定相同文字不同TAG set_tag_m
 setting.set_table("Flight No")#設定要爬的Table的Title其中一個
 setting.to_json()#輸出至檔案
 
-json_str = GetJson("QR").to_string()#從檔案取的Json設定檔
+json_str = GetJson("QR").to_string()#從檔案取得Json設定檔
 
 print(json_str)
 
