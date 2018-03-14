@@ -1,4 +1,4 @@
-from parser import Setting,GetJson,JsonToGetText
+from RobertYE.crawler.parser import Setting, GetJson, JsonToGetText
 
 setting = Setting(open("QR.html"), "QR")#Setting(html,寫入檔名)
 setting.set_tag("KGL-DOH 01 Apr 2018 Passenger,Freighter,Truck ")#設定要爬的文字
